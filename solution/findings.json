@@ -1,12 +1,72 @@
 {
-  "team": "TODO-team-name",
+  "team": "Day-13-Lab-Observathon",
   "schema_version": 1,
   "findings": [
     {
+      "fault_class": "error_spike",
+      "evidence": {"source": "baseline_config", "observed": "tool_error_rate was 0.18 and retry was disabled", "trace_ids": []},
+      "root_cause": "Injected tool failures had no recovery path.",
+      "suggested_fix": "Set tool_error_rate to 0 and enable bounded retry."
+    },
+    {
       "fault_class": "latency_spike",
-      "evidence": {"metric": "latency_p95_ms", "observed": "TODO from your telemetry", "trace_ids": []},
-      "root_cause": "TODO: what config knob or behavior causes it?",
-      "suggested_fix": "TODO: config change and/or wrapper mitigation"
+      "evidence": {"source": "baseline_config", "observed": "max_steps was 12, output limit was 2000, and cache was disabled", "trace_ids": []},
+      "root_cause": "Long agent runs and repeated requests unnecessarily increased tail latency.",
+      "suggested_fix": "Reduce step/output limits, enable cache, and log wall and reported latency."
+    },
+    {
+      "fault_class": "cost_blowup",
+      "evidence": {"source": "baseline_config", "observed": "premium tier, verbose system output, large completion limit, and no tool budget", "trace_ids": []},
+      "root_cause": "The baseline allowed excessive tokens and tool calls.",
+      "suggested_fix": "Use economy tier, concise prompt, 500-token output cap, and tool_budget 3."
+    },
+    {
+      "fault_class": "quality_drift",
+      "evidence": {"source": "baseline_config", "observed": "session_drift_rate was 0.06 with no context reset", "trace_ids": []},
+      "root_cause": "Conversation state was deliberately degraded over later turns.",
+      "suggested_fix": "Disable injected drift, periodically reset context, and use bounded self-consistency."
+    },
+    {
+      "fault_class": "infinite_loop",
+      "evidence": {"source": "baseline_config", "observed": "loop_guard was false and max_steps was 12", "trace_ids": []},
+      "root_cause": "Repeated identical actions were not stopped early.",
+      "suggested_fix": "Enable loop_guard, reduce max_steps, and log repeated action signatures."
+    },
+    {
+      "fault_class": "tool_failure",
+      "evidence": {"source": "baseline_config", "observed": "Unicode normalization was disabled and catalog_override falsely marked macbook unavailable", "trace_ids": []},
+      "root_cause": "Dirty input and a corrupt catalog override changed valid tool results.",
+      "suggested_fix": "Enable Unicode normalization and clear catalog_override."
+    },
+    {
+      "fault_class": "pii_leak",
+      "evidence": {"source": "baseline_config_prompt", "observed": "PII redaction was disabled and the prompt had no privacy rule", "trace_ids": []},
+      "root_cause": "The agent could echo contact details from the request.",
+      "suggested_fix": "Enable config redaction, prohibit PII repetition in the prompt, and redact wrapper output/logs."
+    },
+    {
+      "fault_class": "fabrication",
+      "evidence": {"source": "baseline_prompt", "observed": "The prompt always requested a total without grounding or refusal rules", "trace_ids": []},
+      "root_cause": "The model was encouraged to answer even when stock or catalog data was unavailable.",
+      "suggested_fix": "Require tool grounding and no total for missing, unavailable, or unsupported orders."
+    },
+    {
+      "fault_class": "arithmetic_error",
+      "evidence": {"source": "baseline_config_prompt", "observed": "temperature was 1.6 and no exact discount formula was specified", "trace_ids": []},
+      "root_cause": "Sampling noise and underspecified arithmetic made totals inconsistent.",
+      "suggested_fix": "Use temperature 0.2, exact integer formulas, verification, and self-consistency 2."
+    },
+    {
+      "fault_class": "tool_overuse",
+      "evidence": {"source": "baseline_config_prompt", "observed": "tool_budget was unlimited and the prompt gave no call-order constraints", "trace_ids": []},
+      "root_cause": "The agent had no limit or economy rule for tool use.",
+      "suggested_fix": "Set tool_budget 3 and require each applicable tool at most once."
+    },
+    {
+      "fault_class": "prompt_injection",
+      "evidence": {"source": "baseline_prompt", "observed": "No rule distinguished order notes from trusted system/tool data", "trace_ids": []},
+      "root_cause": "Instructions embedded in customer-controlled notes could override pricing behavior.",
+      "suggested_fix": "Treat notes as untrusted data, use only tool prices, and strip labeled note blocks in the wrapper."
     }
   ]
 }

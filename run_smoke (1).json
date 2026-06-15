@@ -1,0 +1,53 @@
+{
+  "phase": "public",
+  "n": 1,
+  "users": null,
+  "turns": null,
+  "config_used": {
+    "provider": "openai",
+    "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "model_price_tier": "economy",
+    "max_steps": 6,
+    "loop_guard": true,
+    "temperature": 0.2,
+    "context_size": 4,
+    "verbose_system": false,
+    "retry": {
+      "enabled": true,
+      "max_attempts": 3,
+      "backoff_ms": 700
+    },
+    "cache": {
+      "enabled": true
+    },
+    "normalize_unicode": true,
+    "redact_pii": true,
+    "session_drift_rate": 0.0,
+    "context_reset_every": 6,
+    "tool_error_rate": 0.0,
+    "catalog_override": {},
+    "planner": false,
+    "verify": true,
+    "self_consistency": 1,
+    "tool_budget": 4,
+    "prompt_chars": 1661,
+    "custom_prompt": true
+  },
+  "results": [
+    {
+      "qid": "smoke-01",
+      "question": "Mua 2 iPhone dung ma WINNER, ship Ha Noi - tong cong bao nhieu VND?",
+      "answer": "",
+      "status": "wrapper_error",
+      "session": "smoke-01",
+      "turn": 0,
+      "ts": "2026-06-13T00:00:00.107783Z"
+    }
+  ],
+  "sealed": {
+    "alg": "HMAC-SHA256",
+    "note": "binary-measured metrics for scoring; build your own observability in wrapper.py",
+    "data": "W3siZXJyb3IiOiBudWxsLCAibGF0ZW5jeV9tcyI6IDAsICJtb2RlbCI6IG51bGwsICJwaWkiOiBmYWxzZSwgInByb3ZpZGVyIjogIm9wZW5haSIsICJzdGVwcyI6IDAsICJ0b29sc191c2VkIjogW10sICJ1c2FnZSI6IHt9fV0=",
+    "sig": "e020f04ae3c974d0e13b6297e5770f54abde99ed9027ae4927f3a1ebe595031e"
+  }
+}

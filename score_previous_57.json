@@ -1,0 +1,21 @@
+{
+  "team": "2A202600739-NguyenTranKien",
+  "phase": "public",
+  "headline": 57.01,
+  "sub": {
+    "correct": 0.2067,
+    "quality": 0.4386,
+    "error": 0.6083,
+    "latency": 0.5463,
+    "cost": 0.3704,
+    "drift": 0.0,
+    "prompt": 0.6157
+  },
+  "diag_f1": 0.842,
+  "n": 120,
+  "n_correct": 17,
+  "judge_mode": "offline",
+  "weights_hash": "e81a8ed58d93",
+  "key_hash": "9a800fa6968d",
+  "sig": "2359b4989a22148a2cc1a0dfda6ae535ccc40f0e999fe89bf0ecb1a64b9bdd0b"
+}
